@@ -1,11 +1,13 @@
-
 # TeensyVisualizer
 ### 14 Channel Audio Spectrum Analyzer for Teensy 4.0
+![TeensyVisualizer in Rainbow Mode](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/rainbow_animated.gif)
 ![Top Board Layout](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/Render%20Top%20V1.0.svg)
+
+*A dual MSGEQ7 powered shield for the SmartLED display driver.*
 
 Main components:
 - Teensy 4.0 MCU
-- SmartLED Shield
+- SmartLED Display Shield
 - HUB75 Compatible LED Matrix
 - MSGEQ7 Graphic Equalizer Display Filters
 - Adafruit Si5351A Clock Generator
@@ -27,16 +29,14 @@ You can adjust the brightness of the display with the onboard rubberized knob, a
 - Non-volatile setting storage
 - Automatic shut off when no input detected
 
+## Buy PCB/Kits
+PCBs can be purchased on Tindie for a low cost [here](https://www.tindie.com/products/27737/). The components can all be sourced on popular suppliers like Digi-Key or Mouser.
 
-
-
-## Buy PCB/Kit
-PCBs and component kits are available for purchase through [tindie.com](https://www.tindie.com/products/27737/).
-Fully-assembled units are available per request.
+Full Kits include everything you need to build your own TeensyVisualizer, they are available for purchase through Tindie [here](https://www.tindie.com/products/27748/).
 
 ## Build It Yourself
 [BOM](https://github.com/dgorbunov/TeensyVisualizer/tree/main/BOM)
-[Schematic](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.0.svg)
+[Schematic:](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.0.svg)
 ![Schematic Image](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.0.svg)
 
 ## Credits
