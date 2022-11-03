@@ -1,7 +1,7 @@
 /* 
  *  TeensyVisualizer, 14 Channel Audio Visualizer for Teensy 4.0 using HUB75 LED Matrices.
  *  Author: Daniel Gorbunov. Instructions, PCB, Schematics, and Code available on GitHub.
- *  Code v2.0, November 2022. MIT License. github.com/dgorbunov/TeensyVisualizer
+ *  Code v2.01, November 2022. MIT License. github.com/dgorbunov/TeensyVisualizer
  *  
  *  The following libraries must be installed to use this software: 
  *  SmartMatrix, SmartMatrix GFX, FastLED, MegunoLink, SI5351MCU
@@ -244,7 +244,8 @@ void lines(boolean filled, String color){
     int nextPeak = getPeakValue(i);
     
     if (color == "Heat") {
-      currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
+      if (i == 0) currentColor = CRGB(CHSV(100 - nextPeak * 3.2, 255, 255));
+      else currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
     } else if (color == "Wave") {
       currentColor = CRGB(CHSV((i) * 16 + getWaveModifier(), 255, 255));
     } else if (color == "White") {
@@ -266,7 +267,8 @@ void bounce(boolean filled, String color) {
     int nextPeak = getPeakValue(i);
     
     if (color == "Heat") {
-      currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
+      if (i == 0) currentColor = CRGB(CHSV(100 - nextPeak * 3.2, 255, 255));
+      else currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
     } else if (color == "Wave") {
       currentColor = CRGB(CHSV((i) * 16 + getWaveModifier(), 255, 255));
 //      SM_RGB currentColorPhased = CRGB(CHSV((i) * 16 + getWaveModifier() + 127, 255, 255));
@@ -402,7 +404,7 @@ void autoDim() {
     }
     
   } else {
-    currentBrightness = userBrightness;
+    currentBrightness = (userBrightness < 2) ? 0 : userBrightness;
   }
 
   matrix.setBrightness(max(currentBrightness, 0)); //limit brightness to positives only
