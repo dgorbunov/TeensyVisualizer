@@ -1,49 +1,54 @@
 # TeensyVisualizer
-### 14 Channel Audio Spectrum Analyzer for Teensy 4.0
+### 14 Channel Music Visualizer for Teensy 4.0
+*IC-based hardware spectrum analyzer with line, microphone input, and configurable display modes.*
+
 ![TeensyVisualizer in Rainbow Mode](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/rainbow_animated.gif)
 ![Top Board Layout](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/Render%20Top%20V1.0.svg)
 
-*A dual MSGEQ7 powered shield for the SmartLED display driver.*
+An entirely on-chip hardware spectrum analyzer that displays frequency bins from either line-in or microphone input on an RGB LED Matrix display. Designed to work with HUB75 RGB LED Matrices, and scalable to any size. 14 bands across 40Hz - 16kHz are displayed in a variety of user changeable modes. Modes can be changed with the built-in button on the back of TeensyVisualizer and brightness can be adjusted with the onboard potentiometer. There are several display modes and color profiles to chose from, these settings are all non-volatile and stored into the Teensy's onboard EEPROM memory.
 
-Main components:
-- Teensy 4.0 MCU
-- SmartLED Display Shield
-- HUB75 Compatible LED Matrix
-- MSGEQ7 Graphic Equalizer Display Filters
-- Adafruit Si5351A Clock Generator
+This PCB uses all hardware frequency analysis instead of software-based FFT like most Teensy-based audio visualizers. The two MSI MSGEQ7 Graphic Equalizer Display Filters compute frequency bins and decay at a logarathmic rate per sample, creating a much more realistic representation of audio than FFT. The onboard switch allows use of the built-in microphone or passthrough 3.5mm line input, both inputs feature adjustable gain through a dual op amp. A trick is used to offset the center frequencies of the 2 MSGEQ7 ICs by passing in two external clocks via the onboard SI5351A Clock Generator - this allows 14 independent frequencies to be sampled.
 
-An audio spectrum analyzer that displays frequency bins of line-in or built-in microphone input on an RGB LED Matrix display. 14 peak-detected bands are displayed across a 40Hz - 16kHz range creating a satisfying light show.
-
-This PCB uses all hardware frequency analysis instead of software-based FFT like most Teensy-based audio visualizers. The two MSGEQ7 ICs compute frequency bins and factor in exponential decay, creating a much more realistic representation of audio than traditional FFT approaches. The onboard switch allows use of the built-in microphone or 3.5mm audio input+output, both feature adjustable gain independent from the input volume.
-
-You can adjust the brightness of the display with the onboard rubberized knob, and press the built-in button to change display modes. You can cycle between different types of spectrum analyzers and different color gradients, and your settings are all stored in permanent memory so you don't have to cycle back to them every time the unit powers on. The board also features automatic shut off when no input is detected for convenience.
+## Main components:
+- Teensy 4.0 ARM MCU
+- SmartMartix SmartLED Shield
+- HUB75 64x32 P5 LED Matrix (scalable to any matrix size/pitch)
+- 2x MSI MSGEQ7 Graphic Equalizer ICs
+- Adafruit SI5351A Clock Generator
+- LM358 Dual Channel Op Amp
 
 ## Features:
-- Retro look, hardware based, clock-adjustable 14 channel audio visualizer
-- Automatic scaling to display size
-- Supports 3.5mm audio input with direct output, or built-in microphone with input switch
-- Dual amplifiers with adjustable gain
+- 14 Channel IC-Based Hardware Spectrum Analyzer
+- Automatic scaling to any matrix size, supports daisy chaining
+- Switch between 3.5mm line-in passthrough or built-in microphone
+- Dual channel amplifier with adjustable gain
 - Built-in 5V DC jack with on/off switch
 - Onboard button to switch display modes
 - Onboard knob to control display brightness
 - Non-volatile setting storage
-- Automatic shut off when no input detected
+- Automatic dimming when no audio detected
 
-## Buy PCB/Kits
-PCBs can be purchased on Tindie for a low cost [here](https://www.tindie.com/products/27737/). The components can all be sourced on popular suppliers like Digi-Key or Mouser.
+## PCB/Kits
+PCBs can be purchased on Tindie [here](https://www.tindie.com/products/27737/). Components can all be sourced on popular suppliers like Digi-Key or Mouser by following the Bill of Materials (BOM). Gerber files are also included if you want to fabricate the PCB yourself.
 
 Full Kits include everything you need to build your own TeensyVisualizer, they are available for purchase through Tindie [here](https://www.tindie.com/products/27748/).
 
 ## Build It Yourself
-[BOM](https://github.com/dgorbunov/TeensyVisualizer/tree/main/BOM)
-[Schematic:](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.0.svg)
-![Schematic Image](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.0.svg)
+The Bill of Materials can be found here: [BOM](https://github.com/dgorbunov/TeensyVisualizer/tree/main/BOM).
+The Schematic can be found here: [Schematic](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.1.svg).
+![Schematic Image](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Schematic/Schematic%20V1.1.svg)
+
+## 3D Printed Case
+![TeensyVisaulizer Case](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/Case%20V1.0.png)
+The 3D Printed Case is included with the Kit, or you can print it yourself. This case is designed for the standard 320mm x 160mm 64x32 P5 LED Matrix.
+[STL Download](https://github.com/dgorbunov/TeensyVisualizer/raw/main/Case/TeensyVisualizer%20Case%20V1.0.stl).
 
 ## Credits
-Originally inspired by Mark Donner's 14 Channel Analyzer based off the ATMega2560 using FastLED. Circuitry redesigned from the ground up around Teensy and 3.3V using SmartMatrix HUB75 panels and programmed from scratch.
+Originally inspired by Mark Donner's 14 Channel Analyzer based off the ATMega2560 using FastLED. Circuit redesigned from the ground up around Teensy and 3.3V using SmartMatrix HUB75 panels and programmed from scratch.
 
 The following open-source libraries are used:
 - SmartMatrix
+- SmartMatrix GFX
 - FastLED
-- Si5351MCU
-- MegunoLink Filter
+- MegunoLink
+- SI5351MCU
