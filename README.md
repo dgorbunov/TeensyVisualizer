@@ -1,5 +1,5 @@
 # TeensyVisualizer
-### 14 Channel Music Visualizer for Teensy 4.0
+### 14 Channel LED Matrix Music Visualizer for Teensy 4.0
 *IC-based hardware spectrum analyzer with line, microphone input, and configurable display modes.*
 
 ![TeensyVisualizer in Rainbow Mode](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/rainbow_animated.gif)
