@@ -42,8 +42,9 @@ The Schematic can be found here: [Schematic](https://github.com/dgorbunov/Teensy
 
 ## Build Instructions
 1. Solder all components to the PCB per the BOM. Make sure female headers are used for any ICs including the Teensy. Solder 2x14 male header pins on the reverse side of the PCB next to the Teensy, these will be inserted in to the display driver.
-2. Insert PCB with male header pins into the SmartLED Display Shield, making sure it is fully seated. Insert the 2 PCBs with Teensy on top into the male port on the LED Matrix. The TeensyVisualizer board should be flush with the edge of the matrix and sitting on top of it.
-3. Attach power cable to matrix and positive and negative to the terminal block on the TeensyVisualizer PCB, clamping them down.
+2. Cut the trace between VIN and VUSB on the back of the Teensy. This prevents back-powering your computer when connected to the Teensy over USB.
+3. Insert PCB with male header pins into the SmartLED Display Shield, making sure it is fully seated. Insert the 2 PCBs with Teensy on top into the male port on the LED Matrix. The TeensyVisualizer board should be flush with the edge of the matrix and sitting on top of it.
+4. Attach power cable to matrix and positive and negative to the terminal block on the TeensyVisualizer PCB, clamping them down.
 
 ## Use Instructions
 1. Insert 5V DC Power Barrel into connector, use large switch to turn on power.
@@ -54,7 +55,7 @@ The Schematic can be found here: [Schematic](https://github.com/dgorbunov/Teensy
 
 ## 3D Printed Case
 ![TeensyVisaulizer Case](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/Case%20V1.0.png)
-The 3D Printed Case is included with the Kit, or you can print it yourself. This case is designed for the standard 320mm x 160mm 64x32 P5 LED Matrix.
+The 3D Printed Case is included with the Kit, or you can print it yourself. This case is designed for the standard 320mm x 160mm 64x32 P5 LED Matrix and requires six M3x30mm screws.
 [STL Download](https://github.com/dgorbunov/TeensyVisualizer/raw/main/Case/TeensyVisualizer%20Case%20V1.0.stl).
 
 

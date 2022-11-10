@@ -44,8 +44,8 @@ SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(backgroundLayer, kMatrixWidth, kMatrixHeig
 #define OUT_PIN_1 15       // MSGEQ7_1 output (this is A1/15 on Teensy 4.0)
 
 // SI5351A Frequencies - default for 14 channel sweep
-unsigned long long CLK_FREQ_0 = 104570; // MSGEQ7 clock freq. 0
-unsigned long long CLK_FREQ_1 = 166280; // MSGEQ7 clock freq. 1 
+uint32_t CLK_FREQ_0 = 104570; // MSGEQ7 clock freq. 0
+uint32_t CLK_FREQ_1 = 166280; // MSGEQ7 clock freq. 1 
 
 int binWidth = 14;                // Calculates width based on display size
 int binPadding = 4;               // Calculates padding to center graphics
@@ -60,7 +60,7 @@ bool modeChanged = false;             // Stores whether mode has been changed
 unsigned long timeButtonPressed = 0;  // Initial time that the button was pressed
 unsigned long modeSwitchTime = 650;   // Time required holding button to change currentMode
 
-unsigned long waveCycleTime = 3000; // Gradient wave cycle time
+unsigned long waveCycleTime = 4000; // Gradient wave cycle time
 unsigned long waveStartTime = 0;    // Gradient wave start timer
 
 // TODO: Bezier curves
@@ -77,8 +77,7 @@ std::map<int, String> colors =
 {
   {0, "Rainbow"},
   {1, "Wave"},
-  {2, "Heat"}, 
-  {3, "White"}
+  {2, "Heat"}
 };
 
 unsigned int currentMode = 0;
@@ -248,8 +247,6 @@ void lines(boolean filled, String color){
       else currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
     } else if (color == "Wave") {
       currentColor = CRGB(CHSV((i) * 16 + getWaveModifier(), 255, 255));
-    } else if (color == "White") {
-      currentColor = CRGB(255,255,255);
     } else {
       currentColor = CRGB(CHSV((i) * 16, 255, 255));
     }
@@ -272,8 +269,6 @@ void bounce(boolean filled, String color) {
     } else if (color == "Wave") {
       currentColor = CRGB(CHSV((i) * 16 + getWaveModifier(), 255, 255));
 //      SM_RGB currentColorPhased = CRGB(CHSV((i) * 16 + getWaveModifier() + 127, 255, 255));
-    } else if (color == "White") {
-      currentColor = CRGB(255,255,255);
     } else {
       currentColor = CRGB(CHSV((i) * 16, 255, 255));
     }
@@ -295,11 +290,9 @@ void blocks(boolean filled, String color) {
       currentColor = CRGB(CHSV(100 - peak * 3.2, 255, 255));
     } else if (color == "Wave") {
       currentColor = CRGB(CHSV((i) * 17 + getWaveModifier(), 255, 255));
-    } else if (color == "White") {
-      currentColor = CRGB(255,255,255);
     } else {
       currentColor = CRGB(CHSV((i) * 17, 255, 255));
-    }
+    }    
     
     if (filled) backgroundLayer.fillRectangle(x, kMatrixHeight - 1, x + binWidth - 1, kMatrixHeight - 1 - peak, currentColor);
     else backgroundLayer.drawLine(x, kMatrixHeight - 1 - peak, x + binWidth - 1, kMatrixHeight - 1 - peak, currentColor);
