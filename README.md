@@ -2,7 +2,7 @@
 ### 14 Channel LED Matrix Music Visualizer for Teensy 4.0
 *IC-based hardware spectrum analyzer with line, microphone input, and configurable display modes.*
 
-![TeensyVisualizer in Rainbow Mode](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/rainbow_animated.gif)
+[![TeensyVisualizer in Rainbow Mode](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/rainbow_animated.gif)](https://www.youtube.com/shorts/IFxiID-yiMM)
 ![Backside](https://github.com/dgorbunov/TeensyVisualizer/blob/main/Photos/Backside.jpg)
 
 An entirely on-chip hardware spectrum analyzer that displays frequency bins from either line-in or microphone input on an RGB LED Matrix display. Designed to work with HUB75 RGB LED Matrices, and scalable to any size. 14 bands across 40Hz - 16kHz are displayed in a variety of user changeable modes. Modes can be changed with the built-in button on the back of TeensyVisualizer and brightness can be adjusted with the onboard potentiometer. There are several display modes and color profiles to chose from, these settings are all non-volatile and stored into the Teensy's onboard EEPROM memory.
