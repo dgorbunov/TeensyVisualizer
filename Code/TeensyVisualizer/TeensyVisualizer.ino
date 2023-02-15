@@ -88,7 +88,7 @@ Si5351mcu si;
 ExponentialFilter<int> * BinFilters[14];
 
 void setup() {
-  Serial.begin(115200);
+//  Serial.begin(115200);
 
   // Initialize matrix
   matrix.addLayer(&backgroundLayer); 
@@ -174,7 +174,7 @@ void loop() {
   // If FPS below target, draw white pixel in upper right
   if (correctedFPS < TARGET_FPS - 2) {
     backgroundLayer.drawPixel(kMatrixWidth - 1, 0, {255,255,255});
-    Serial.println("Low FPS");
+//    Serial.println("Low FPS");
   }
   
   int buttonState = digitalRead(MODE_PIN);
@@ -207,8 +207,8 @@ void loop() {
   }
 
   String color = colors.at(currentColor);
-  Serial.println("Mode: " + modes.at(currentMode));
-  Serial.println("Color: " + color);
+//  Serial.println("Mode: " + modes.at(currentMode));
+//  Serial.println("Color: " + color);
 
   switch(currentMode) {
     case 0:
@@ -238,7 +238,7 @@ void loop() {
   }
   
   correctedFPS = 1.0 / ((millis() - loopStartTime) / 1000.0);
-  Serial.println("FPS: " + (String) correctedFPS);
+//  Serial.println("FPS: " + (String) correctedFPS);
 }
 
 // Lines drawn between the peaks of each channel
@@ -436,7 +436,6 @@ void readFrequencies() {
   for (int i = 0, n = 0; i < 14; i++) {
     if (i % 2 == 0) {
       BinFilters[i]->Filter(levelBin[0][n]);
-      if (BinFilters
     } else {
       BinFilters[i]->Filter(levelBin[1][n++]);
     }
