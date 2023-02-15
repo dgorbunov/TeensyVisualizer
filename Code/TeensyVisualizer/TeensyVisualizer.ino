@@ -28,8 +28,9 @@ const uint8_t kBackgroundLayerOptions = (SM_BACKGROUND_OPTIONS_NONE);
 SMARTMATRIX_ALLOCATE_BUFFERS(matrix, kMatrixWidth, kMatrixHeight, kRefreshDepth, kDmaBufferRows, kPanelType, kMatrixOptions);
 SMARTMATRIX_ALLOCATE_BACKGROUND_LAYER(backgroundLayer, kMatrixWidth, kMatrixHeight, COLOR_DEPTH, kBackgroundLayerOptions);
 
-#define NOISE 70             // 0-1023, noise subtracted from signaal
+#define NOISE 100             // 0-1023, noise subtracted from signaal
 #define NOISE_TOLERANCE 1.2  // NOISE_TOLERANCE * NOISE = minimum noise to go into idle
+#define NOISE_THRESHOLD 2    // Multiplied by noise for minimum value to display bin
 #define SMOOTHING 72         // 100 = no smoothing, 0 = full smoothing
 #define TARGET_FPS 28        // 0-60, frames per second. Higher FPS = faster decay due to more sampling
 #define ADDRESS_MODE 0       // Memory address for currentMode, default 0
@@ -98,8 +99,8 @@ void setup() {
   backgroundLayer.fillScreen({0,0,0});
   backgroundLayer.swapBuffers();
   backgroundLayer.setFont(font6x10);
-  backgroundLayer.drawString(14, 1, {212,66,245}, "Teensy");
-  backgroundLayer.drawString(2, 11, {212,66,245}, "Visualizer");
+  backgroundLayer.drawString(14, 1, {255,0,0}, "Teensy");
+  backgroundLayer.drawString(2, 11, {255,0,0}, "Visualizer");
   backgroundLayer.setFont(font3x5);
   backgroundLayer.drawString(14, 24, {255,255,255}, "14 Channel");
   backgroundLayer.swapBuffers();
@@ -147,11 +148,17 @@ void setup() {
   si.enable(0);
   si.enable(1);
 
-  // Loading Animation
+  // float Animation
+  const float mult = (220 / (kMatrixWidth - 1));
   for (int i = 0; i < kMatrixWidth; i++) {
-    delay(35);
-    backgroundLayer.fillRectangle(i, kMatrixHeight - 1, i, kMatrixHeight - 2, {255,255,255});
+    backgroundLayer.setFont(font6x10);
+    backgroundLayer.drawString(14, 1, CRGB(CHSV(mult * i, 255, 255)), "Teensy");
+    backgroundLayer.drawString(2, 11, CRGB(CHSV(mult * i, 255, 255)), "Visualizer");
+    backgroundLayer.setFont(font3x5);
+    backgroundLayer.drawString(14, 24, {255,255,255}, "14 Channel");
+    backgroundLayer.fillRectangle(i, kMatrixHeight - 1, i, kMatrixHeight - 2, CRGB(CHSV(mult * i, 255, 255)));
     backgroundLayer.swapBuffers();
+    delay(35);
   }
   
   backgroundLayer.fillScreen({0,0,0});
@@ -429,6 +436,7 @@ void readFrequencies() {
   for (int i = 0, n = 0; i < 14; i++) {
     if (i % 2 == 0) {
       BinFilters[i]->Filter(levelBin[0][n]);
+      if (BinFilters
     } else {
       BinFilters[i]->Filter(levelBin[1][n++]);
     }
